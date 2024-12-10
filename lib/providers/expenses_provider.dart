@@ -20,27 +20,30 @@ class ExpensesProvider extends ChangeNotifier {
     return _salary - totalSpent;
   }
 
-  // CRUD operations
-  void addExpense(String title, String description, double amount) {
-    final newExpense = Expense(
-      id: Random().nextDouble().toString(),
-      title: title,
-      description: description,
-      amount: amount,
-    );
-    _expenses.add(newExpense);
+void addExpense(String title, String description, double amount, String category) {
+  final newExpense = Expense(
+    id: DateTime.now().toString(),
+    title: title,
+    description: description,
+    amount: amount,
+    category: category,
+  );
+  _expenses.add(newExpense);
+  notifyListeners();
+}
+
+
+void updateExpense(String id, String newTitle, String newDescription, double newAmount, String newCategory) {
+  final idx = _expenses.indexWhere((exp) => exp.id == id);
+  if (idx >= 0) {
+    _expenses[idx].title = newTitle;
+    _expenses[idx].description = newDescription;
+    _expenses[idx].amount = newAmount;
+    _expenses[idx].category = newCategory;
     notifyListeners();
   }
+}
 
-  void updateExpense(String id, String newTitle, String newDescription, double newAmount) {
-    final idx = _expenses.indexWhere((exp) => exp.id == id);
-    if (idx >= 0) {
-      _expenses[idx].title = newTitle;
-      _expenses[idx].description = newDescription;
-      _expenses[idx].amount = newAmount;
-      notifyListeners();
-    }
-  }
 
   void deleteExpense(String id) {
     _expenses.removeWhere((exp) => exp.id == id);

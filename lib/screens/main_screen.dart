@@ -42,10 +42,10 @@ class MainScreen extends StatelessWidget {
                 return ExpenseCard(
                   expense: expenses[i],
                   onDelete: () => expensesData.deleteExpense(expenses[i].id),
-                  onUpdate: (newTitle, newDesc, newAmount) {
-                    expensesData.updateExpense(
-                        expenses[i].id, newTitle, newDesc, newAmount);
-                  },
+                  onUpdate: (newTitle, newDesc, newAmount, newCategory) {
+  expensesData.updateExpense(expenses[i].id, newTitle, newDesc, newAmount, newCategory);
+},
+
                 );
               },
             ),
